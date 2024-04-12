@@ -55,7 +55,6 @@ func Proto() error {
 		"livekit_models.proto",
 		"livekit_rtc.proto",
 		"livekit_webhook.proto",
-		"livekit_relay.proto",
 	}
 	infraProtoFiles := []string{
 		"infra/link.proto",

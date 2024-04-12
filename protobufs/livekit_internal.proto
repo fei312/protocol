@@ -25,6 +25,7 @@ import "livekit_egress.proto";
 import "livekit_relay.proto";
 import "livekit_rtc.proto";
 
+
 enum NodeType {
   SERVER = 0;
   CONTROLLER = 1;
@@ -176,3 +177,4 @@ message SFUSync {
   // TODO
   string node_id = 99;
 }
+
