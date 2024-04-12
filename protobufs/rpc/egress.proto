@@ -16,8 +16,9 @@ syntax = "proto3";
 
 package rpc;
 
-option go_package = "github.com/livekit/protocol/rpc";
+option go_package = "github.com/livekit/livekit/pkg/service/rpc";
 
+import "google/protobuf/any.proto";
 import "options.proto";
 import "livekit_egress.proto";
 
@@ -58,6 +59,9 @@ message StartEgressRequest {
   string room_id = 3;
   string token = 8;
   string ws_url = 9;
+
+  // metadata
+  map<string, google.protobuf.Any> metadata = 12;
 }
 
 message ListActiveEgressRequest {}

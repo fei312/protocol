@@ -22,6 +22,8 @@ option ruby_package = "LiveKit::Proto";
 // internal protos, not exposed to clients
 import "livekit_models.proto";
 import "livekit_egress.proto";
+import "livekit_relay.proto";
+import "livekit_rtc.proto";
 
 enum NodeType {
   SERVER = 0;
@@ -149,4 +151,28 @@ enum ICECandidateType {
 message ICEConfig {
   ICECandidateType preference_subscriber = 1;
   ICECandidateType preference_publisher = 2;
+}
+
+message SFUSync {
+  string room_name = 1;
+  string participant_identity = 2;
+  oneof message {
+    RoomSync room_sync = 3;
+    ParticipantsSync participants_sync = 4;
+    SpeakersChanged speakers_changed = 5;
+    TrackInActive track_inactive = 6;
+    TrackPublic track_public = 7;
+    AddTrackRequest add_track = 8;
+    StartSubscription start_sub = 9;
+    RelaySubFinish relay_sub_finish = 10;
+    LeaveRequest leave = 11;
+    MuteTrackRequest mute = 12;
+    RelayConnectCloseRequest connect_close = 13;
+    SendDataResponseSync send_data_sync = 14;
+    UpdateParticipantMetadata update_metadata = 15;
+    UpdateSubscription subscription = 16;
+    UpdateTrackSettings track_setting = 17;
+  }
+  // TODO
+  string node_id = 99;
 }

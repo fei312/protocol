@@ -1,0 +1,107 @@
+// Copyright 2023 LiveKit, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package livekit;
+option go_package = "github.com/livekit/protocol/livekit";
+option csharp_namespace = "LiveKit.Proto";
+option ruby_package = "LiveKit::Proto";
+
+import "livekit_models.proto";
+import "livekit_room.proto";
+
+message RoomSync {
+  string room_name = 1;
+  string room_id = 2;
+  string node_id = 3;
+  bool flag = 4;
+}
+
+message ParticipantsSync {
+  string room_name = 1;
+  repeated ParticipantInfo participants = 2;
+}
+
+message TrackInActive {
+  uint32 ssrc = 1;
+}
+
+message TrackPublic {
+  string id = 1;
+  string stream_id = 2;
+  uint32 payload_type = 3;
+  int32 kind = 4;
+  uint32 ssrc = 5;
+  RTPCodecParameters codec = 6;
+  string rid = 7;
+  
+  //RTPReceiver结构体中的RTPTransceiver
+  // RTPReceiver receiver = 8;
+
+  string room_name = 9;
+  string participant_identity = 10;
+  //RTPParameters是onmediatrack函数调用时真正需要的，其他内容并不需要
+  RTPParameters RTP_parameters = 11;
+  string node_id = 12;
+}
+
+message RTPParameters{
+  repeated RTPHeaderExtensionParameter header_extensions = 1;
+  repeated RTPCodecParameters codecs = 2;
+}
+
+message RTPCodecParameters {
+  RTPCodecCapability RTP_code_capability = 1;
+  uint32 payload_type = 2;
+  string stats_id = 3;
+}
+
+message RTPCodecCapability {
+  string mime_type = 1;
+  uint32 clockrate = 2;
+  uint32 channels = 3;
+  string SDP_fmtp_line = 4;
+  repeated RTCPFeedback RTCP_feedback = 5;
+}
+
+message RTPHeaderExtensionParameter {
+  string URI = 1;
+  int32 id = 2;
+}
+
+message RTCPFeedback {
+  string type = 1;
+  string parameter = 2;
+}
+
+message StartSubscription {
+  string room_name = 1;
+  string node_id = 2;
+}
+
+message RelaySubFinish {
+  string room_name = 1;
+  string participant_identity = 2;
+  string track_iD = 3;
+  string ssrc = 4;
+}
+
+message RelayConnectCloseRequest {
+  string ssrc = 1;
+}
+
+message SendDataResponseSync {
+  SendDataRequest send_data = 1;
+}

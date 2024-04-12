@@ -16,7 +16,7 @@ syntax = "proto3";
 
 package rpc;
 
-option go_package = "github.com/livekit/protocol/rpc";
+option go_package = "github.com/livekit/livekit/pkg/service/rpc";
 
 import "options.proto";
 import "livekit_internal.proto";
@@ -37,7 +37,10 @@ service Signal {
 }
 
 message RelaySignalRequest {
-  livekit.StartSession start_session = 1;
+  oneof message {
+    livekit.StartSession start_session = 1;
+    livekit.SFUSync SFUSync = 2;
+  }
   repeated livekit.SignalRequest requests = 3;
   uint64 seq = 4;
   bool close = 5;

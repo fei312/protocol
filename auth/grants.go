@@ -64,6 +64,7 @@ type ClaimGrants struct {
 	// for verifying integrity of the message body
 	Sha256   string `json:"sha256,omitempty"`
 	Metadata string `json:"metadata,omitempty"`
+	CorpCId  string `json:"corp_cid,omitempty"`
 }
 
 func (c *ClaimGrants) SetParticipantKind(kind livekit.ParticipantInfo_Kind) {
